@@ -1,0 +1,2 @@
+# .gitignore
+agenda_tarefas
