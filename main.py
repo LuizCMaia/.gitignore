@@ -1,5 +1,4 @@
 
-# main.py - VERSÃO COM IMAGEM DE FUNDO COBRINDO TUDO
 import flet as ft
 import sqlite3
 from datetime import datetime
@@ -17,7 +16,7 @@ def main(page: ft.Page):
 
     card_bgcolor = ft.Colors.WHITE70
 
-    # --- Funções de Banco de Dados ---
+ 
     def db_execute(query, params=()):
         with sqlite3.connect(DB_FILE) as conn:
             cursor = conn.cursor()
@@ -31,7 +30,7 @@ def main(page: ft.Page):
             cursor.execute(query, params)
             return [dict(row) for row in cursor.fetchall()]
 
-    # --- Componentes da UI ---
+
     nome_tarefa = ft.TextField(label="Nome da tarefa...", expand=True)
     descricao_tarefa = ft.TextField(label="Descrição...", expand=True)
     tipo_tarefa = ft.TextField(label="Tipo (Ex: Trabalho)", expand=True)
@@ -42,7 +41,7 @@ def main(page: ft.Page):
     tarefas_pendentes_col = ft.Column(spacing=10)
     tarefas_concluidas_col = ft.Column(spacing=10)
 
-    # --- Lógica da Aplicação ---
+   
     def renderizar_tarefas(search_term=None):
         tarefas_pendentes_col.controls.clear()
         tarefas_concluidas_col.controls.clear()
@@ -134,10 +133,10 @@ def main(page: ft.Page):
         prefix_icon=ft.Icons.SEARCH
     )
 
-    # --- Montagem da Tela Principal ---
+    
     bg_image = ft.Image(
         src="tarefas.png",
-        # ALTERAÇÃO: fit=ft.ImageFit.COVER para cobrir todo o espaço
+      
         fit=ft.ImageFit.COVER,
         repeat=ft.ImageRepeat.NO_REPEAT,
         opacity=1,
@@ -175,12 +174,11 @@ def main(page: ft.Page):
     page.add(
         ft.Stack(
             controls=[
-                # ALTERAÇÃO: O Container da imagem também precisa expandir
+              
                 ft.Container(
                     expand=True,
                     content=bg_image,
-                    # Não precisamos de alignment aqui se a imagem for COBRIR tudo
-                    # alignment=ft.alignment.center_right
+                  
                 ),
                 ft.Row(
                     controls=[
@@ -197,5 +195,4 @@ def main(page: ft.Page):
 
     renderizar_tarefas()
 
-# --- Inicia a Aplicação ---
 ft.app(target=main)
